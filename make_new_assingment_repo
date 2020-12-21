@@ -1,5 +1,5 @@
 #!/bin/bash
-# quick & dirty.  You must have the github client 'gh' installed.  Insert your own private template repo prefix at line 23.
+# quick & dirty.  You must have the github client 'gh' installed, ssh keys & an auth token.  Insert your own private template repo prefix at line 23 & 26.
 
 if [ -z "$3" ]; then
    echo "
