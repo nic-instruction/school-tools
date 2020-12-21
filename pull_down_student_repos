@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export AUTHORIZATION_TOKEN="7b8ab24625adbc6bd9de26723f29257744c94b79"
-export MY_ORG="YU-java-211"
-export PREFIX="Gradle"
+export AUTHORIZATION_TOKEN=""
+export MY_ORG=""
+export PREFIX=""
 
 curl -H "Authorization: token $AUTHORIZATION_TOKEN" \
 -s https://api.github.com/search/repositories?q=$PREFIX+in:name+org:$MY_ORG\&per_page=200 \
