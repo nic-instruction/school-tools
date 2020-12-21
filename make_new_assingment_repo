@@ -1,5 +1,5 @@
 #!/bin/bash
-# quick, dirty, and I'm pretty sure you can simplify the grep -v's.
+# quick & dirty.  You must have the github client 'gh' installed.
 
 if [ -z "$3" ]; then
    echo "
