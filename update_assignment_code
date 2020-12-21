@@ -1,0 +1,10 @@
+#!/bin/bash
+#cd into the root of your new github repo
+
+
+MyNewClass="" #insert name of new java class
+grep -rlZ 'HelloWorld' . | tr \\n \\0 | xargs -0 sed -i '' -e "s/HelloWorld/$MyNewClass/g"
+grep -rlZ 'Hello World' . | tr \\n \\0 | xargs -0 sed -i '' -e "s/Hello World/$MyNewClass/g"
+mv HelloWorld.java $MyNewClass.java 
+
+# Note: you'll still need to update the README.md, any I/O tests, and the code file itself.
