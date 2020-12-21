@@ -1,0 +1,26 @@
+#!/bin/bash
+# quick, dirty, and I'm pretty sure you can simplify the grep -v's.
+
+if [ -z "$3" ]; then
+   echo "
+
+USAGE: bash make_new_assignment_repo Name_for_your_new_repo name_of_your_template_repo "repo description string"
+
+EXAMPLE: bash make_new_assignment_repo new-repo template-repo "this is a new cool repo created from a template"
+
+Note: this will create a new repo for you on github and pull it down to your cwd.  The template is pulled from github as well. 
+
+"
+
+   exit 0 
+fi
+
+newRepoName=$1
+templateRepoName=$2
+repoDescription=$3
+
+
+gh repo create $newRepoName -d "$repDescription" -y   --private --template git@github.com:nic-instruction/$templateRepoName.git
+rm -rf $newRepoName
+sleep 20
+git clone git@github.com:nic-instruction/$newRepoName.git
