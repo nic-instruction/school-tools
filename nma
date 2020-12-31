@@ -1,0 +1,34 @@
+#!/bin/bash
+# quick, dirty, and proudly overuses tr and sed.  Note: this is designed for mac and has not been tested on linux where tools behave more sanely.
+
+if [ -z "$3" ]; then
+   echo "
+
+USAGE: bash mna name_of_your_java_class name_of_your_template_repo "repo description string"
+
+EXAMPLE: bash "New Assignment" new-repo template-repo "this is a new cool repo created from a template"
+
+Note: this will create a new repo for you on github and pull it down to your cwd.  The template is pulled from github as well. 
+
+"
+
+   exit 0 
+fi
+
+newRepoName=$(echo "$1" | tr "[A-Z]" "[a-z]" | sed 's/ /-/g')
+templateRepoName=$2
+repoDescription=$3
+
+
+gh repo create $newRepoName -d "$repoDescription" -y   --private --template git@github.com:nic-instruction/$templateRepoName.git
+rm -rf $newRepoName
+sleep 20
+git clone git@github.com:nic-instruction/$newRepoName.git
+
+cd $newRepoName
+export MyNewClass=$(echo "$1" | sed 's/ //g')
+export MyNewName="$1"
+
+grep -rlZ 'HelloWorld' . | tr \\n \\0 | xargs -0 sed -i '' -e "s/HelloWorld/$MyNewClass/g"
+mv HelloWorld.java $MyNewClass.java
+grep -rlZ 'Hello World' . | tr \\n \\0 | xargs -0 sed -i '' -e "s/Hello World/$MyNewName/g"
